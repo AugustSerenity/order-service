@@ -1,0 +1,62 @@
+{
+  "order_uid": "e7f4a92b4e1c47d8test",
+  "track_number": "WBILMTESTTRACK2",
+  "entry": "ENTRY41",
+  "delivery": {
+    "name": "Dyyd Dshaga",
+    "phone": "+15551444567",
+    "zip": "90210",
+    "city": "Chertanovo Severnoe",
+    "address": "343 Maple Street",
+    "region": "Moscow",
+    "email": "dyyd.doe@example.com"
+  },
+  "payment": {
+    "transaction": "e7f4a92b4e1c47d8test",
+    "request_id": "REQ123",
+    "currency": "EUR",
+    "provider": "paypal",
+    "amount": 2500,
+    "payment_dt": 1648764000,
+    "bank": "beta",
+    "delivery_cost": 2000,
+    "goods_total": 500,
+    "custom_fee": 50
+  },
+  "items": [
+    {
+      "chrt_id": 9876543,
+      "track_number": "WBILMTESTTRACK2",
+      "price": 300,
+      "rid": "ab1234567a764ae0btest",
+      "name": "T-shirt",
+      "sale": 10,
+      "size": "M",
+      "total_price": 270,
+      "nm_id": 4567890,
+      "brand": "Nike",
+      "status": 200
+    },
+    {
+      "chrt_id": 8765432,
+      "track_number": "WBILMTESTTRACK3",
+      "price": 700,
+      "rid": "cd0987654a764ae0btest",
+      "name": "Jeans",
+      "sale": 20,
+      "size": "L",
+      "total_price": 560,
+      "nm_id": 3456789,
+      "brand": "Levi's",
+      "status": 201
+    }
+  ],
+  "locale": "en",
+  "internal_signature": "abc123",
+  "customer_id": "user123",
+  "delivery_service": "dhl",
+  "shardkey": "5",
+  "sm_id": 88,
+  "date_created": "2022-03-15T12:45:00Z",
+  "oof_shard": "2"
+}
