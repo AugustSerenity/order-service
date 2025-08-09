@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	k "github.com/AugustSerenity/order-service/internal/kafka"
+	k "github.com/AugustSerenity/order-service/internal/kafka/producer"
 	"github.com/sirupsen/logrus"
 )
 
@@ -13,10 +13,10 @@ const (
 	messagePath = "/Users/glebbelov/WB/L0/order-service/cmd/producer/messages"
 )
 
-var addres = []string{"localhost:9093"}
+var address = []string{"localhost:9093"}
 
 func main() {
-	p, err := k.NewProducer(addres)
+	p, err := k.NewProducer(address)
 	if err != nil {
 		logrus.Fatal(err)
 	}

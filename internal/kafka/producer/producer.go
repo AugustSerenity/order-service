@@ -1,4 +1,4 @@
-package kafka
+package producer
 
 import (
 	"errors"
@@ -18,9 +18,9 @@ type Producer struct {
 	producer *kafka.Producer
 }
 
-func NewProducer(addres []string) (*Producer, error) {
+func NewProducer(address []string) (*Producer, error) {
 	conf := &kafka.ConfigMap{
-		"bootstrap.servers": strings.Join(addres, ","),
+		"bootstrap.servers": strings.Join(address, ","),
 	}
 
 	p, err := kafka.NewProducer(conf)
