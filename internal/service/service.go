@@ -21,7 +21,6 @@ func NewOrderService(cache *cache.Cache, st Storage) *Service {
 	}
 }
 
-// Восстановление кэша из БД
 func (s *Service) RestoreCache() error {
 	orders, err := s.storage.GetAllOrders()
 	if err != nil {

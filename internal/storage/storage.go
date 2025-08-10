@@ -22,14 +22,23 @@ func (s *Storage) SaveOrder(order model.Order) error {
 		return fmt.Errorf("failed to marshal order: %w", err)
 	}
 
-	_, err = s.db.Exec(`
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("failed to begin transaction: %w", err)
+	}
+
+	_, err = tx.Exec(`
 		INSERT INTO orders (uid, content)
 		VALUES ($1, $2)
 		ON CONFLICT (uid) DO NOTHING
 	`, order.OrderUID, data)
-
 	if err != nil {
+		tx.Rollback()
 		return fmt.Errorf("failed to insert order: %w", err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("failed to commit transaction: %w", err)
 	}
 
 	return nil

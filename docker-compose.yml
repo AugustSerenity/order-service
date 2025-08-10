@@ -1,12 +1,26 @@
 version: '3.8'
 
 services:
+  postgres-service:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=orders
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./migration/001_init.up.sql:/docker-entrypoint-initdb.d/001_init.up.sql
+    restart: unless-stopped
+  
   zookeeper:
     image: bitnami/zookeeper:latest
     ports:
       - "2181:2181"
     environment:
       ALLOW_ANONYMOUS_LOGIN: "yes"
+    restart: unless-stopped
 
   kafka:
     image: bitnami/kafka:3.4
@@ -22,11 +36,12 @@ services:
       ALLOW_PLAINTEXT_LISTENER: "yes"
     depends_on:
       - zookeeper
+    restart: unless-stopped
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
@@ -34,3 +49,13 @@ services:
       KAFKA_CLUSTERS_0_POLLING_TIMEOUT_MS: "30000"
     depends_on:
       - kafka
+    restart: unless-stopped
+
+  app:
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-service
+      - kafka
+    restart: on-failure
